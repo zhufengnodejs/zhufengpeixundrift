@@ -25,6 +25,24 @@ $(function(){
             });
         }
     })
+
+    $('#throwModal').on('hidden.bs.modal', function (e) {
+        var content = $('#content').val();
+        if(content){
+            $.ajax({
+                url:"/bottle/throw",
+                type:'POST',
+                data:{content:content},
+                dataType:'json'
+            }).done(function(result){
+                if(result['code']==1){
+
+                }else{
+
+                }
+            });
+        }
+    });
 })
 
 function logout(){

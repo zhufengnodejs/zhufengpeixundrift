@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var bottle = require('./routes/bottle');
 var session = require('express-session');
 var RedisStore = require('connect-redis')(session);
 var app = express();
@@ -14,7 +15,7 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-
+var Bottle = require('./model/Bottle');
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -33,11 +34,23 @@ app.use(session({
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(function(req,res,next){
   res.locals.user = req.session.user ||  {throwTimes:0,pickTimes:0};
-  next();
+  var user = res.locals.user;
+  if(user.username){
+    Bottle.getTimes(user.username,function(err,data){
+      user.throwTimes = data.throwTimes;
+      user.pickTimes = data.pickTimes;
+      console.log(user);
+      next();
+    })
+  }else{
+    next();
+  }
+
+
 });
 app.use('/', routes);
 app.use('/users', users);// /users/add
-
+app.use('/bottle', bottle);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

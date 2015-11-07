@@ -3,7 +3,7 @@
       - var showInfo = user.username?'block':'none';
       - var showReg = user.username?'none':'block';
       #regInfoDiv(style="display:#{showInfo}")
-         img#myAvatar(src="#{user.avatar}",style="height:50px;width:50px")
+         img#myAvatar(src="#{user.avatar?user.avatar:''}",style="height:50px;width:50px")
          span#myUsername=user.username
          a(href="#",onclick="logout()") 退出
       #regBtnDiv(style="display:#{showReg}")
@@ -12,12 +12,12 @@
 .row(style="position:absolute;left:0px;bottom:5px;width:800px")
    .col-md-4.text-center
       img(src='/images/bottle.png')
-      a(href="#",onclick="throwBottle()") 扔一个
+      a(href="#",data-toggle="modal" data-target="#throwModal") 扔一个
          span#throwTimes.badge #{6 - user.throwTimes}
    .col-md-4.text-center
       img(src='/images/net.png')
-      a(href="#",onclick="pick()") 捞一个
-         span#pickTimes.badge #{6 - user.pickTimes}
+      a(href="#",data-toggle="modal" data-target="#pickModal") 捞一个
+         span#pickTimes.badge #{3 - user.pickTimes}
    .col-md-4.text-center
       img(src='/images/my.png')
-      a(href="#",onclick="myBottle()") 我的瓶子
+      a(href="#",data-toggle="modal" data-target="#myBottleModal") 我的瓶子
