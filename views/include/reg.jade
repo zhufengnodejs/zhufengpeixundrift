@@ -1,0 +1,19 @@
+#regModal.modal.fade
+    .modal-dialog
+        .modal-content
+            .modal-header
+               h4.modal-title 注册
+                   button.close(type='button',data-dismiss='modal') 关闭
+            .modal-body
+                .row
+                    form#regForm.form-horizontal(method='post',action='users/add')
+                        .form-group
+                            label.col-sm-2.control-label(for='username') 呢称
+                            .col-sm-8
+                                input#username.form-control(type='text',name='username',value='')
+                        .form-group
+                            label.col-sm-2.control-label(for='avatar') 头像
+                            .col-sm-8
+                                input#avatar.form-control(type='file',name='avatar',value='')
+            .modal-footer
+                button.btn.btn-default(type='button', data-dismiss='modal') 注册

@@ -7,7 +7,8 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-
+var session = require('express-session');
+var RedisStore = require('connect-redis')(session);
 var app = express();
 
 // view engine setup
@@ -20,9 +21,18 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(session({
+  secret:'drift',
+  resave:true,
+  saveUninitialized:false,
+  store:new RedisStore({
+    host:'123.57.143.189',
+    port:6379
+  })
+}));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(function(req,res,next){
-  res.locals.user = {throwTimes:0,pickTimes:0};
+  res.locals.user = req.session.user ||  {throwTimes:0,pickTimes:0};
   next();
 });
 app.use('/', routes);

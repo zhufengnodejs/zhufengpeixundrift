@@ -1,0 +1,18 @@
+//-
+   通过mixin来定义函数，通过+加名字可以调用
+doctype html
+html
+   head
+   body
+      mixin sayHello
+         p say hello
+      +sayHello
+      +sayHello
+
+      mixin study(name,courses)
+         p #{name}
+         ul.courses
+            each course in courses
+               li=course
+      +study('zfpx',['jade','node','java'])
+
