@@ -1,0 +1,22 @@
+{
+  "name": "zhufengpeixundrift",
+  "description": "",
+  "main": "",
+  "authors": [
+    "zhangrenyang-t510 <zhang_renyang@>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/zhufengnodejs/zhufengpeixundrift",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "./public/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5"
+  }
+}

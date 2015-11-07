@@ -1,0 +1,23 @@
+.row(style="position:absolute;left:0;top:5;width:800px")
+   .col-md-offset-8.col-md-4.text-right
+      - var infoStyle = user.username?'block':'none';
+      - var regStyle = user.username?'none':'block';
+      #regInfoDiv(style="display:#{infoStyle}")
+         img#myAvatar(src="",style="height:50px;width:50px")
+         span#myUsername
+         a(href="#",onclick="logout") 退出
+      #regBtnDiv(style="display:#{regStyle}")
+         a(href='#',onclick="reg()") 注册
+
+.row(style="position:absolute;left:0px;bottom:5px;width:800px")
+   .col-md-4.text-center
+      img(src='/images/bottle.png')
+      a(href="#",onclick="throwBottle()") 扔一个
+         span#throwTimes.badge #{6 - user.throwTimes}
+   .col-md-4.text-center
+      img(src='/images/net.png')
+      a(href="#",onclick="pick()") 捞一个
+         span#pickTimes.badge #{6 - user.pickTimes}
+   .col-md-4.text-center
+      img(src='/images/my.png')
+      a(href="#",onclick="myBottle()") 我的瓶子

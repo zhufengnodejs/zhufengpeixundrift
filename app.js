@@ -21,7 +21,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(function(req,res,next){
+  res.locals.user = {throwTimes:0,pickTimes:0};
+  next();
+});
 app.use('/', routes);
 app.use('/users', users);// /users/add
 
